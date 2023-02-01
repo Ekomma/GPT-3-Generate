@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Prompt {
+  id Int @id @default(autoincrement())
+  text String @db.VarChar(255)
+  answers Answer[]
+
+  @@map("prompts")
+}
+
+model Answer {
+  id Int @id @default(autoincrement())
+  prompt Prompt @relation(fields: [promptId], references: [id])
+  promptId Int
+  text String @db.VarChar(255)
+  modText String? @db.VarChar(255)
+  rank Int?
+  flag Boolean?
+
+  @@map("answers")
+}

@@ -1,0 +1,31 @@
+type Answer {
+    id: Int
+    prompt: String
+    promptId: Int
+    text: String
+    modText: String
+    rank: Int
+    flag: Boolean
+}
+
+mutation generatePrompt($prompt: String!) {
+  generatePrompt(prompt: $prompt) {
+    id
+    promptId
+    text
+    modText
+    rank
+    flag
+  }
+}
+
+mutation updateAnswer($AnswerModField: answerModField!) {
+  updateAnswer(answer: $AnswerModField) {
+    id
+    promptId
+    text
+    modText
+    rank
+    flag
+  }
+}
